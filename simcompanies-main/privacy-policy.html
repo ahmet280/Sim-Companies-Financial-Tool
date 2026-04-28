@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy – Sim Companies Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #060d14;
+      color: #c8dde8;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #0a1520;
+      border: 1px solid #0d2030;
+      border-radius: 16px;
+      padding: 48px 52px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #002a1e;
+      border: 1px solid #00d4a840;
+      color: #00d4a8;
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #00d4a8, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #4a7090;
+      margin-bottom: 36px;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      font-size: 14px;
+      color: #00d4a8;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 32px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #0d2030;
+    }
+
+    p,
+    li {
+      font-size: 14px;
+      line-height: 1.85;
+      color: #8ab4cc;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .highlight {
+      background: #002a1e;
+      border-left: 3px solid #00d4a8;
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #00d4a8;
+    }
+
+    .contact-box {
+      background: #08131e;
+      border: 1px solid #0d2030;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+
+    .contact-box a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 11px;
+      color: #2a4a60;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="badge">Chrome Extension</div>
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">Sim Companies Dashboard &nbsp;·&nbsp; Last updated: April 3, 2026</p>
+
+    <div class="highlight">
+      🔒 This extension does <strong>not</strong> collect, store, or transmit any personal data to external servers.
+    </div>
+
+    <h2>1. Overview</h2>
+    <p>
+      Sim Companies Dashboard ("the Extension") is a Chrome browser extension designed to help
+      Sim Companies players visualize and analyze their in-game financial data.
+      We are committed to protecting your privacy. This policy explains what data the extension
+      accesses and how it is used.
+    </p>
+
+    <h2>2. Data We Access</h2>
+    <p>The extension accesses the following data solely within your browser:</p>
+    <ul>
+      <li>
+        <strong>Sim Companies game data</strong> — Financial reports, balance sheets, cash flow records,
+        warehouse inventory, and product data retrieved from the official Sim Companies API
+        (<code>simcompanies.com</code>), which you are already logged into.
+      </li>
+      <li>
+        <strong>Browser Storage (chrome.storage)</strong> — Used exclusively to save your personal
+        preferences such as theme (dark/light), language selection, and growth goal targets.
+        This data never leaves your device.
+      </li>
+      <li>
+        <strong>Active Tab</strong> — The extension reads the active Sim Companies tab to
+        retrieve your session data. No browsing history or other tab content is ever accessed.
+      </li>
+    </ul>
+
+    <h2>3. Data We Do NOT Collect</h2>
+    <ul>
+      <li>No personal identification information (name, email, address, etc.)</li>
+      <li>No payment or financial card information</li>
+      <li>No browsing history or data from other websites</li>
+      <li>No data is ever sent to third-party servers or our servers</li>
+      <li>No analytics or tracking of any kind</li>
+    </ul>
+
+    <h2>4. Third-Party Services</h2>
+    <p>The extension loads the following external resources for functionality and display:</p>
+    <ul>
+      <li>
+        <strong>jsdelivr.net</strong> — Used to load a public Earth texture image for the animated
+        globe on the loading screen. No user data is sent.
+      </li>
+      <li>
+        <strong>simcompanies.com API</strong> — The official game API is used to fetch your own
+        in-game data. This is equivalent to browsing the game website normally.
+      </li>
+    </ul>
+
+    <h2>5. Permissions Justification</h2>
+    <ul>
+      <li>
+        <strong>storage</strong> — To locally save your UI preferences (theme, language, goals).
+      </li>
+      <li>
+        <strong>tabs</strong> — To detect and communicate with your open Sim Companies tab.
+      </li>
+      <li>
+        <strong>host_permissions (simcompanies.com)</strong> — To read your in-game financial data
+        from the official game API while you are logged in.
+      </li>
+    </ul>
+
+    <h2>6. Data Retention</h2>
+    <p>
+      All data processed by the extension exists only in your browser's local memory and storage.
+      No data is persisted on any external server. Uninstalling the extension removes all locally
+      stored preferences.
+    </p>
+
+    <h2>7. Children's Privacy</h2>
+    <p>
+      This extension is not directed at children under the age of 13. We do not knowingly collect
+      any information from children.
+    </p>
+
+    <h2>8. Changes to This Policy</h2>
+    <p>
+      We may update this privacy policy from time to time. Any changes will be reflected on this
+      page with an updated date. Continued use of the extension after changes constitutes acceptance
+      of the updated policy.
+    </p>
+
+    <h2>9. Contact</h2>
+    <div class="contact-box">
+      <p>If you have any questions about this privacy policy, please open an issue on GitHub:</p>
+      <p style="margin-top:10px;">
+        🔗 <a href="https://github.com/ahmet280/sim-companies-dashboard/issues" target="_blank">
+          github.com/ahmet280/sim-companies-dashboard
+        </a>
+      </p>
+    </div>
+
+    <footer>
+      © 2026 Sim Companies Dashboard · Chrome Extension · All rights reserved
+    </footer>
+  </div>
+</body>
+
+</html>

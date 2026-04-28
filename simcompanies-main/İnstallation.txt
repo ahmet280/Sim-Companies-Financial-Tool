@@ -1,0 +1,23 @@
+=== SIM COMPANIES DASHBOARD - CHROME EKLENTİSİ ===
+
+KURULUM ADIMLARI:
+─────────────────
+1. Chrome'u aç
+2. Adres çubuğuna yaz: chrome://extensions
+3. Sağ üstte "Geliştirici modu" anahtarını AÇ
+4. "Paketlenmemiş öğe yükle" butonuna tıkla
+5. Bu klasörü (sim-extension) seç → Tamam
+
+KULLANIM:
+─────────
+1. simcompanies.com adresine git ve giriş yap
+2. Chrome araç çubuğundaki S ikonuna tıkla
+3. "VERİLERİ OKU" butonuna bas
+4. 2-3 saniye bekle → Tüm veriler yüklenir!
+
+NOT:
+────
+• Sim Companies sekmesi açık olmalı
+• Giriş yapmış olmalısın
+• "↻ YENİLE" ile verileri güncelleyebilirsin
+• ☀/☾ ile açık/koyu tema değiştirebilirsin

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sim Companies Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Roboto Condensed', sans-serif;
+      background: #fafafa;
+      min-width: 350px;
+    }
+
+    /* Smooth Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+      border-radius: 3px;
+      transition: background 0.2s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #bdbdbd;
+    }
+
+    /* Minimal Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.9;
+        transform: scale(1.02);
+      }
+    }
+
+    /* Dropdown Menu Styles */
+    .tab-dropdown-menu {
+      animation: slideUp 0.2s ease;
+    }
+
+    .tab-dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .tab-dropdown-menu::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .tab-dropdown-menu::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+      border-radius: 3px;
+    }
+
+    /* Popup mode için minimum genişlik */
+    @media (min-width: 400px) {
+      body {
+        min-width: 400px;
+      }
+    }
+
+    /* Standalone window mode için daha geniş layout */
+    @media (min-width: 900px) {
+      .stat-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+      }
+    }
+
+    #root {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Content Area */
+    .app-content {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .tab-bar {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+
+    .tab-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-bar button {
+      flex-shrink: 0;
+      white-space: nowrap;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .content-area {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
+    }
+
+    .content-area::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .content-area::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .content-area::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 3px;
+    }
+
+    .content-area::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    table {
+      table-layout: auto;
+      width: 100%;
+      font-size: 9px;
+    }
+
+    td,
+    th {
+      font-size: 9px !important;
+      padding: 4px 6px !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Responsive Grid - StatCards */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+      animation: slideUp 0.4s ease;
+    }
+
+    /* Card Hover Effects */
+    .stat-card {
+      transition: all 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Button Styles */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* Header Logo Animation */
+    .app-header > div:first-child > div:first-child {
+      transition: all 0.3s ease;
+      animation: logoGlow 3s ease-in-out infinite;
+    }
+
+    .app-header > div:first-child > div:first-child:hover {
+      transform: scale(1.05) rotate(5deg);
+      animation: none;
+    }
+
+    @keyframes logoGlow {
+      0%, 100% {
+        box-shadow: 0 8px 24px rgba(37, 99, 235, 0.25), 0 4px 8px rgba(37, 99, 235, 0.125);
+      }
+      50% {
+        box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4), 0 4px 12px rgba(37, 99, 235, 0.2);
+      }
+    }
+
+    /* Title Gradient Animation */
+    .title {
+      animation: titleShine 3s ease-in-out infinite;
+    }
+
+    @keyframes titleShine {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.9;
+      }
+    }
+
+    /* Mobile Tab Menu (< 600px) */
+    @media (max-width: 599px) {
+      .tab-bar {
+        padding: 12px 20px !important;
+      }
+    }
+
+    /* Side Panel Specific (< 500px) */
+    @media (max-width: 500px) {
+      .stat-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      td,
+      th {
+        font-size: 10px !important;
+        padding: 8px 10px !important;
+      }
+
+      table {
+        font-size: 10px;
+      }
+
+      /* Header adjustments */
+      .app-header {
+        padding: 18px 24px !important;
+      }
+
+      .app-header > div:first-child > div:first-child {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 24px !important;
+        border-radius: 14px !important;
+      }
+
+      .app-header > div:first-child > div:last-child > div:first-child {
+        font-size: 20px !important;
+      }
+
+      .app-header > div:first-child > div:last-child > div:last-child {
+        font-size: 10px !important;
+        letter-spacing: 1.5px !important;
+      }
+
+      .app-header button {
+        font-size: 10px !important;
+        padding: 10px 16px !important;
+      }
+
+      .app-header button span:first-child {
+        font-size: 14px !important;
+      }
+
+      /* Tab adjustments */
+      .tab-bar {
+        padding: 0 16px !important;
+      }
+
+      .tab-bar button {
+        font-size: 10px !important;
+        padding: 14px 14px !important;
+      }
+
+      /* Content padding */
+      .content-area {
+        padding: 16px !important;
+      }
+    }
+
+    /* Narrow Side Panel (< 400px) */
+    @media (max-width: 400px) {
+      .stat-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      td,
+      th {
+        font-size: 9px !important;
+        padding: 6px 8px !important;
+      }
+
+      .app-header {
+        padding: 16px 20px !important;
+      }
+
+      .app-header > div:first-child > div:first-child {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 22px !important;
+        border-radius: 12px !important;
+      }
+
+      .app-header > div:first-child > div:last-child > div:first-child {
+        font-size: 18px !important;
+      }
+
+      .app-header > div:first-child > div:last-child > div:last-child {
+        font-size: 9px !important;
+        letter-spacing: 1.2px !important;
+      }
+
+      .app-header button {
+        font-size: 10px !important;
+        padding: 9px 14px !important;
+      }
+
+      .app-header button span:first-child {
+        font-size: 13px !important;
+      }
+
+      .tab-bar {
+        padding: 0 12px !important;
+      }
+
+      .tab-bar button {
+        font-size: 9px !important;
+        padding: 12px 12px !important;
+      }
+    }
+
+    /* Wide Side Panel (> 500px) */
+    @media (min-width: 501px) and (max-width: 700px) {
+      .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      td,
+      th {
+        font-size: 11px !important;
+        padding: 10px 12px !important;
+      }
+    }
+
+    /* Very Wide (> 700px) */
+    @media (min-width: 701px) {
+      .stat-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      td,
+      th {
+        font-size: 12px !important;
+        padding: 12px 16px !important;
+      }
+    }
+
+    /* Extra Wide (> 1000px) */
+    @media (min-width: 1001px) {
+      td,
+      th {
+        font-size: 13px !important;
+        padding: 14px 18px !important;
+      }
+    }
+
+    /* Chat Layout Responsive */
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 769px) {
+      .chat-layout {
+        grid-template-columns: 340px 1fr;
+      }
+
+      .chat-filters {
+        position: sticky;
+        top: 24px;
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+      }
+    }
+
+    /* Responsive Grid Adjustments for All Pages */
+    @media (max-width: 500px) {
+      /* 4-column grids become 2-column */
+      [style*="grid-template-columns: repeat(4"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* 3-column grids become 1-column */
+      [style*="grid-template-columns: repeat(3"] {
+        grid-template-columns: 1fr !important;
+      }
+
+      /* 2-column grids stay 2-column but with smaller gap */
+      [style*="grid-template-columns: 1fr 1fr"],
+      [style*="grid-template-columns: 1fr 1.2fr"],
+      [style*="grid-template-columns: 1fr 1.4fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+    }
+
+    @media (min-width: 501px) and (max-width: 768px) {
+      /* 4-column grids become 2-column */
+      [style*="grid-template-columns: repeat(4"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+
+      /* Keep 2-column layouts */
+      [style*="grid-template-columns: 1fr 1.2fr"],
+      [style*="grid-template-columns: 1fr 1.4fr"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Chart responsive */
+    .recharts-wrapper {
+      font-size: 9px !important;
+    }
+
+    @media (max-width: 400px) {
+      .recharts-wrapper {
+        font-size: 7px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="libs/react.min.js"></script>
+  <script src="libs/react-dom.min.js"></script>
+  <script src="libs/prop-types.min.js"></script>
+  <script src="libs/recharts.min.js"></script>
+  <!-- Constants & Data -->
+  <script src="components/constants.js"></script>
+  <script src="components/translations.js"></script>
+  <script src="components/productData.js"></script>
+  <script src="components/recipesData.js"></script>
+
+  <!-- Utilities & Shared Components -->
+  <script src="components/utils.js"></script>
+  <script src="components/shared.js"></script>
+
+  <!-- Page Components -->
+  <script src="components/LoadScreen.js"></script>
+  <script src="components/OzetPage.js"></script>
+  <script src="components/MasterDataPage.js"></script>
+  <script src="components/NakitPage.js"></script>
+  <script src="components/UrunPage.js"></script>
+  <script src="components/ChatPage.js"></script>
+  <script src="components/HedefPage.js"></script>
+  <script src="components/SirketPage.js"></script>
+  <script src="components/VWAPPage.js"></script>
+
+  <!-- Main App -->
+  <script src="components/App.js"></script>
+
+</body>
+
+</html>
