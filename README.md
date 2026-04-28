@@ -1,4 +1,4 @@
-[README.md](https://github.com/user-attachments/files/27164782/README.md)
+[README.md](https://github.com/user-attachments/files/27164893/README.md)
 # Sim Companies Analytics Dashboard
 
 A comprehensive financial and business management dashboard designed for tracking performance, assets, and market data in the **Sim Companies** simulation.
@@ -35,7 +35,7 @@ A robust filtering interface for searching through market data or chat logs by p
 
 ### ⚖️ VWAP & Value Added Comparison
 A specialized comparison tool (available in light theme) for tracking Volume-Weighted Average Price (VWAP) against unit costs to calculate real Value Added (VA) and profit/loss metrics for various goods.
-![VWAP Comparison](7.png)
+![VWAP Comparison](image/7.png)
 
 ---
 
